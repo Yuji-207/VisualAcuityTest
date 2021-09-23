@@ -1,4 +1,5 @@
 const device = document.getElementById("device");
+let sound_path = 'seatbelt_sign.wav';
 
 function defaultSize() {
 
@@ -33,6 +34,11 @@ document.getElementById('start').onclick = () => {
         let count = 0;
         var intervalId = setInterval(() =>　{
 
+            // Play Sound
+            let audioElem = new Audio();
+            audioElem.src = sound_path;
+            audioElem.play();
+
             let mag = Math.floor(count / 5) * 0.1 + 0.1;  // 視力を計算
 
             if (mag <= 1.0) {
@@ -56,7 +62,7 @@ document.getElementById('start').onclick = () => {
             console.log(Math.floor(mag*10)/10, rotate+90);
             count++;
 
-        }, 3000);
+        }, 5000);  // 5秒待機
     }, 10000);  // 10秒待機
 };
 
