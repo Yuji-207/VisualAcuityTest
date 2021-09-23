@@ -64,7 +64,7 @@ document.getElementById('start').onclick = () => {
             console.log(Math.floor(mag*10)/10, rotate+90);
             count++;
 
-        }, 5000);  // 5秒待機
+        }, 3000);  // 5秒待機
     }, 10000);  // 10秒待機
 };
 
