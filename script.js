@@ -26,9 +26,11 @@ function defaultSize() {
 document.getElementById('start').onclick = () => {
 
     document.getElementById('start').classList.add('d-none');
+    document.getElementById('waiting').classList.remove('d-none');
 
     window.setTimeout(() => {
         
+        document.getElementById('waiting').classList.add('d-none');
         document.getElementById('finish').classList.remove('d-none');
     
         let count = 0;
@@ -70,7 +72,8 @@ document.getElementById('start').onclick = () => {
 // Finish Button
 document.getElementById('finish').onclick = () => {
     clearInterval(intervalId);
-    document.getElementById('start').style.classList.remove('d-none');
-    document.getElementById('finish').style.classList.add('d-none');
-    document.getElementById('ring').style.classList.add('d-none');
+    document.getElementById('start').classList.remove('d-none');
+    document.getElementById('finish').classList.add('d-none');
+    document.getElementById('waiting').classList.add('d-none');
+    document.getElementById('ring').classList.add('d-none');
 };
