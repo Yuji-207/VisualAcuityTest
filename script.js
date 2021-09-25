@@ -80,7 +80,7 @@ document.getElementById('start').onclick = () => {
 
         while (true) {  // 画像が画面内の入らない場合をスキップ
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;
-            let pixel = defaultSize()*100 / acuity;
+            let pixel = defaultSize() / acuity;
             if (pixel <= screen.width) {
                 break
             }
