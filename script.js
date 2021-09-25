@@ -74,9 +74,6 @@ document.getElementById('start').onclick = () => {
     document.getElementById('waiting').classList.remove('d-none');
 
     window.setTimeout(() => {
-        
-        document.getElementById('waiting').classList.add('d-none');
-        document.getElementById('finish').classList.remove('d-none');
     
         let count = 0;
         id = setInterval(() =>　{
@@ -100,6 +97,8 @@ document.getElementById('start').onclick = () => {
                 dirs.push(rotate + 90);
 
                 if (count === 0) {
+                    document.getElementById('waiting').classList.add('d-none');
+                    document.getElementById('finish').classList.remove('d-none');
                     document.getElementById('ring').classList.remove('d-none');
                 }
 
