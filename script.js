@@ -77,11 +77,12 @@ document.getElementById('start').onclick = () => {
     
         let count = 0;
         let display = false;
+        let default_size = defaultSize();
 
         while (true) {  // 画像が画面内の入らない場合をスキップ
             count_skip = 0;
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;
-            let pixel = defaultSize() / acuity;
+            let pixel = default_size / acuity;
             if (pixel <= screen.width) {
                 count_skip = count;
                 break
@@ -100,7 +101,7 @@ document.getElementById('start').onclick = () => {
                 audioElem.src = sound_path;
                 audioElem.play();
                 
-                let pixel = String(defaultSize() / acuity) + 'px';  // 画像サイズを設定
+                let pixel = String(default_size / acuity) + 'px';  // 画像サイズを設定
                 document.getElementById('ring').style.width = pixel;
                 document.getElementById('ring').style.height = pixel;
 
