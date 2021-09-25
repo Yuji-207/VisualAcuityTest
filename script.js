@@ -77,7 +77,7 @@ document.getElementById('start').onclick = () => {
         document.getElementById('finish').classList.remove('d-none');
     
         let count = 0;
-        var intervalId = setInterval(() =>　{
+        var id = setInterval(() =>　{
 
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;  // 視力を計算
 
@@ -101,12 +101,11 @@ document.getElementById('start').onclick = () => {
                     document.getElementById('ring').classList.remove('d-none');
                 }
 
-            } else {
-                clearInterval(intervalId);
-            }
+                count++;
 
-            console.log(Math.floor(acuity * 10) / 10, rotate + 90);
-            count++;
+            } else {
+                clearInterval(id);
+            }
 
         }, 3000);  // 3秒待機
     }, 10000);  // 10秒待機
@@ -115,7 +114,7 @@ document.getElementById('start').onclick = () => {
 
 // Finish Button
 document.getElementById('finish').onclick = () => {
-    clearInterval(intervalId);
+    clearInterval(id);
     document.getElementById('start').classList.remove('d-none');
     document.getElementById('finish').classList.add('d-none');
     document.getElementById('waiting').classList.add('d-none');
