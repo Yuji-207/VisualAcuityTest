@@ -1,5 +1,6 @@
 const device = document.getElementById("device");
 let sound_path = 'seatbelt_sign.wav';
+var dirs = [];
 
 function defaultSize() {
 
@@ -17,9 +18,51 @@ function defaultSize() {
         ;  // 画面サイズと解像度を入力させる
     }
 
-    let pixel = 7.5 / 25.4 * dpi;  // 1辺のピクセル数, 7.5[mm] / 25.4[mm/inch] * dpi
+    let pixel = 7.5 / 25.4 * dpi;  // 直径のピクセル数, 7.5[mm] / 25.4[mm/inch] * dpi
     return pixel;
 };
+
+function num2dir(num) {
+    if (num === '2') {
+        return 0;
+    } else if (num === '3') {
+        return 45;
+    } else if (num === '6') {
+        return 90;
+    } else if (num === '9') {
+        return 135;
+    } else if (num === '8') {
+        return 180;
+    } else if (num === '7') {
+        return 225;
+    } else if (num === '4') {
+        return 270;
+    } else if (num === '1') {
+        return 315;
+    } else {
+        return '-';
+    }
+}
+
+function score(dir, answer) {
+
+    if (typeof(answer) === 'number') {
+
+        diff = Math.abs(dir - answer);
+
+        if (diff === 0) {
+            return 0.2;
+        } else if (diff === 45 || diff === 315) {
+            return 0.1;
+        } else {
+            return 0.0;
+        }
+        
+    } else {
+        return 0.0;
+    }
+
+}
 
 
 // Start Button
@@ -36,22 +79,23 @@ document.getElementById('start').onclick = () => {
         let count = 0;
         var intervalId = setInterval(() =>　{
 
-            // Play Sound
-            let audioElem = new Audio();
-            audioElem.src = sound_path;
-            audioElem.play();
+            let acuity = Math.floor(count / 5) * 0.1 + 0.1;  // 視力を計算
 
-            let mag = Math.floor(count / 5) * 0.1 + 0.1;  // 視力を計算
+            if (acuity <= 0.1) {
 
-            if (mag <= 1.0) {
+                // Play Sound
+                let audioElem = new Audio();
+                audioElem.src = sound_path;
+                audioElem.play();
 
-                let pixel = String(defaultSize() / mag) + 'px';  // 画像サイズを設定
+                let pixel = String(defaultSize() / acuity) + 'px';  // 画像サイズを設定
                 document.getElementById('ring').style.width = pixel;
                 document.getElementById('ring').style.height = pixel;
 
                 var rotate = Math.floor(Math.random() / 0.125) * 0.125;  // 画像の回転角を設定
                 rotate = rotate * 360 - 90;  // 度数法に変換し, 0度を0時方向に修正
                 document.getElementById('ring').style.transform = 'rotate(' + rotate + 'deg)';
+                dirs.push(rotate + 90);
 
                 if (count === 0) {
                     document.getElementById('ring').classList.remove('d-none');
@@ -61,7 +105,7 @@ document.getElementById('start').onclick = () => {
                 clearInterval(intervalId);
             }
 
-            console.log(Math.floor(mag*10)/10, rotate+90);
+            console.log(Math.floor(acuity * 10) / 10, rotate + 90);
             count++;
 
         }, 3000);  // 3秒待機
@@ -76,4 +120,35 @@ document.getElementById('finish').onclick = () => {
     document.getElementById('finish').classList.add('d-none');
     document.getElementById('waiting').classList.add('d-none');
     document.getElementById('ring').classList.add('d-none');
+};
+
+
+// Answer
+document.getElementById('answer-btn').onclick = () => {
+
+    document.getElementById('tbody').innerHTML = "";
+    const numbers = document.getElementById('answer').value.split('');
+
+    for (var i=0; i<dirs.length; i++) {
+
+        dir = dirs[i];
+        number = numbers[i];
+        answer = num2dir(number);
+
+        document.getElementById('tbody').insertAdjacentHTML(
+            'beforeend', 
+            `<tr>\
+                <th scope="row">${i + 1}</th>\
+                <td>${Math.floor(i / 5) * 0.1 + 0.1}</td>\
+                <td>${dir}</td>\
+                <td>${answer}</td>\
+                <td>${score(dir, answer)}</td>\
+            </tr>`
+        );
+    }
+
+    // 表までスクロール
+    let position = document.getElementById('table').getBoundingClientRect();
+    window.scrollTo(0, position.top);
+
 };

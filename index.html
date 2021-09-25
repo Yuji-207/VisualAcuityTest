@@ -7,22 +7,42 @@
         <title>VisualAcuityTest</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="container vh-100">
-            <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="d-flex justify-content-center align-items-center h-75">
                 <img id="ring" class="d-none" src="LandoltRing.png" alt="LandoltRing" width="100", height="100" disabled>
             </div>
-            <div class="row fixed-bottom p-5">
-                <button id="start" class="btn btn-success p-2 g-2" type="button">Start</button>
-                <button id="finish" class="btn btn-success p-2 g-2 d-none" type="button">Finish</button>
-                <button id="waiting" class="btn btn-secondary p-2 g-2 d-none" type="button" disabled>Ready for the test...</button>
-                <select id="device" class="form-select p-2 g-2" aria-label="Default select example">
+            <div class="row">
+                <button id="start" class="btn btn-success p-2 my-2" type="button">Start</button>
+                <button id="finish" class="btn btn-success p-2 my-2 d-none" type="button">Finish</button>
+                <button id="waiting" class="btn btn-secondary p-2 my-2 d-none" type="button" disabled>Ready for the test...</button>
+                <div class="input-group my-2">
+                    <input id="answer" type="text" class="form-control" placeholder="Enter the answer numbers." aria-label="Enter the answer numbers." aria-describedby="answer-btn">
+                    <button class="btn btn-outline-secondary" type="button" id="answer-btn">Answer</button>
+                  </div>
+                <select id="device" class="form-select p-2 my-2" aria-label="Default select example">
                     <option value="macbook" selected>MacBook Pro</option>
                     <option value="pixel3">Pixel 3</option>
                     <option value="pixel3xl">Pixel 3 XL</option>
                     <option value="huawei">HUAWEI Mate 20 Pro</option>
                 </select>
+            </div>
+            <div class="row">
+                <table id="table" class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Acuity</th>
+                        <th scope="col">Dirction</th>
+                        <th scope="col">Answer</th>
+                        <th scope="col">Correct / Wrong</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                  </table>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
