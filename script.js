@@ -1,6 +1,7 @@
-const device = document.getElementById("device");
 let sound_path = 'seatbelt_sign.wav';
 var dirs = [];
+const device = document.getElementById("device");
+
 
 function defaultSize() {
 
@@ -68,6 +69,8 @@ function score(dir, answer) {
 // Start Button
 document.getElementById('start').onclick = () => {
 
+    var dirs = [];
+
     document.getElementById('start').classList.add('d-none');
     document.getElementById('waiting').classList.remove('d-none');
 
@@ -108,24 +111,27 @@ document.getElementById('start').onclick = () => {
             }
 
         }, 3000);  // 3秒待機
+
+
+        // Finish Button
+        document.getElementById('finish').onclick = () => {
+            document.getElementById('start').classList.remove('d-none');
+            document.getElementById('finish').classList.add('d-none');
+            document.getElementById('waiting').classList.add('d-none');
+            document.getElementById('ring').classList.add('d-none');
+            clearInterval(id);
+            dirs = [];
+        };
+
+
     }, 10000);  // 10秒待機
-};
-
-
-// Finish Button
-document.getElementById('finish').onclick = () => {
-    clearInterval(id);
-    document.getElementById('start').classList.remove('d-none');
-    document.getElementById('finish').classList.add('d-none');
-    document.getElementById('waiting').classList.add('d-none');
-    document.getElementById('ring').classList.add('d-none');
 };
 
 
 // Answer
 document.getElementById('answer-btn').onclick = () => {
 
-    document.getElementById('tbody').innerHTML = "";
+    document.getElementById('tbody').innerHTML = "";  // 既存の表を削除
     const numbers = document.getElementById('answer').value.split('');
 
     for (var i=0; i<dirs.length; i++) {
