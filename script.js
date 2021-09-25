@@ -79,9 +79,11 @@ document.getElementById('start').onclick = () => {
         let display = false;
 
         while (true) {  // 画像が画面内の入らない場合をスキップ
+            count_skip = 0;
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;
             let pixel = defaultSize() / acuity;
             if (pixel <= screen.width) {
+                count_skip = count;
                 break
             }
             count++;
@@ -143,6 +145,7 @@ document.getElementById('answer-btn').onclick = () => {
 
     for (let i=0; i<dirs.length; i++) {
 
+        let acuity = Math.floor(Math.floor(i + count_skip / 5) * 0.1 + 0.1);
         let dir = dirs[i];
         let number = numbers[i];
         let answer = num2dir(number);
@@ -151,7 +154,7 @@ document.getElementById('answer-btn').onclick = () => {
             'beforeend', 
             `<tr>\
                 <th scope="row">${i + 1}</th>\
-                <td>${Math.floor(i / 5) * 0.1 + 0.1}</td>\
+                <td>${acuity}</td>\
                 <td>${dir}</td>\
                 <td>${answer}</td>\
                 <td>${score(dir, answer)}</td>\
