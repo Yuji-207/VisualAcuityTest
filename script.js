@@ -1,5 +1,4 @@
 let sound_path = 'seatbelt_sign.wav';
-var dirs = [];
 const device = document.getElementById("device");
 
 
@@ -16,7 +15,7 @@ function defaultSize() {
     } else if (name === 'huawei'){
         var dpi = 537.75;
     } else {
-        ;  // 画面サイズと解像度を入力させる
+        // 画面サイズと解像度を入力させる
     }
 
     let pixel = 7.5 / 25.4 * dpi;  // 直径のピクセル数, 7.5[mm] / 25.4[mm/inch] * dpi
@@ -49,7 +48,7 @@ function score(dir, answer) {
 
     if (typeof(answer) === 'number') {
 
-        diff = Math.abs(dir - answer);
+        let diff = Math.abs(dir - answer);
 
         if (diff === 0) {
             return 0.2;
@@ -68,8 +67,8 @@ function score(dir, answer) {
 
 // Start Button
 document.getElementById('start').onclick = () => {
-
-    var dirs = [];
+    
+    dirs = [];
 
     document.getElementById('start').classList.add('d-none');
     document.getElementById('waiting').classList.remove('d-none');
@@ -80,7 +79,7 @@ document.getElementById('start').onclick = () => {
         document.getElementById('finish').classList.remove('d-none');
     
         let count = 0;
-        var id = setInterval(() =>　{
+        id = setInterval(() =>　{
 
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;  // 視力を計算
 
@@ -111,20 +110,17 @@ document.getElementById('start').onclick = () => {
             }
 
         }, 3000);  // 3秒待機
-
-
-        // Finish Button
-        document.getElementById('finish').onclick = () => {
-            document.getElementById('start').classList.remove('d-none');
-            document.getElementById('finish').classList.add('d-none');
-            document.getElementById('waiting').classList.add('d-none');
-            document.getElementById('ring').classList.add('d-none');
-            clearInterval(id);
-            dirs = [];
-        };
-
-
     }, 10000);  // 10秒待機
+};
+
+
+// Finish Button
+document.getElementById('finish').onclick = () => {
+    document.getElementById('start').classList.remove('d-none');
+    document.getElementById('finish').classList.add('d-none');
+    document.getElementById('waiting').classList.add('d-none');
+    document.getElementById('ring').classList.add('d-none');
+    clearInterval(id);
 };
 
 
@@ -134,11 +130,11 @@ document.getElementById('answer-btn').onclick = () => {
     document.getElementById('tbody').innerHTML = "";  // 既存の表を削除
     const numbers = document.getElementById('answer').value.split('');
 
-    for (var i=0; i<dirs.length; i++) {
+    for (let i=0; i<dirs.length; i++) {
 
-        dir = dirs[i];
-        number = numbers[i];
-        answer = num2dir(number);
+        let dir = dirs[i];
+        let number = numbers[i];
+        let answer = num2dir(number);
 
         document.getElementById('tbody').insertAdjacentHTML(
             'beforeend', 
