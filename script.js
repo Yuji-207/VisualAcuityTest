@@ -9,7 +9,7 @@ function defaultSize() {
     if (name === 'macbook') {
         var dpi = 127.67;
     } else if (name === 'pixel3') {
-        var dpi = 443;
+        var dpi = 440;
     } else if (name === 'pixel3xl') {
         var dpi = 523;
     } else if (name === 'huawei'){
