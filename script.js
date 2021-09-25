@@ -145,7 +145,7 @@ document.getElementById('answer-btn').onclick = () => {
 
     for (let i=0; i<dirs.length; i++) {
 
-        let acuity = Math.floor(Math.floor(i + count_skip / 5) * 0.1 + 0.1);
+        let acuity = Math.floor((Math.floor(i + count_skip / 5) * 0.1 + 0.1) * 10) / 10;
         let dir = dirs[i];
         let number = numbers[i];
         let answer = num2dir(number);
