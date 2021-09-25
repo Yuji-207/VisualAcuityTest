@@ -76,30 +76,38 @@ document.getElementById('start').onclick = () => {
     window.setTimeout(() => {
     
         let count = 0;
+        let display = false;
+
         id = setInterval(() =>　{
 
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;  // 視力を計算
 
             if (acuity <= 0.1) {
 
-                // Play Sound
-                let audioElem = new Audio();
-                audioElem.src = sound_path;
-                audioElem.play();
+                let pixel = defaultSize() / acuity;
 
-                let pixel = String(defaultSize() / acuity) + 'px';  // 画像サイズを設定
-                document.getElementById('ring').style.width = pixel;
-                document.getElementById('ring').style.height = pixel;
+                if (pixel <= screen.width) {  // 画像が画面サイズに入る場合
 
-                var rotate = Math.floor(Math.random() / 0.125) * 0.125;  // 画像の回転角を設定
-                rotate = rotate * 360 - 90;  // 度数法に変換し, 0度を0時方向に修正
-                document.getElementById('ring').style.transform = 'rotate(' + rotate + 'deg)';
-                dirs.push(rotate + 90);
+                    // Play Sound
+                    let audioElem = new Audio();
+                    audioElem.src = sound_path;
+                    audioElem.play();
+                    
+                    let pixel = String(defaultSize() / acuity) + 'px';  // 画像サイズを設定
+                    document.getElementById('ring').style.width = pixel;
+                    document.getElementById('ring').style.height = pixel;
+    
+                    var rotate = Math.floor(Math.random() / 0.125) * 0.125;  // 画像の回転角を設定
+                    rotate = rotate * 360 - 90;  // 度数法に変換し, 0度を0時方向に修正
+                    document.getElementById('ring').style.transform = 'rotate(' + rotate + 'deg)';
+                    dirs.push(rotate + 90);
 
-                if (count === 0) {
-                    document.getElementById('waiting').classList.add('d-none');
-                    document.getElementById('finish').classList.remove('d-none');
-                    document.getElementById('ring').classList.remove('d-none');
+                    if (!display) {
+                        document.getElementById('waiting').classList.add('d-none');
+                        document.getElementById('finish').classList.remove('d-none');
+                        document.getElementById('ring').classList.remove('d-none');
+                        display = true;
+                    }
                 }
 
                 count++;
