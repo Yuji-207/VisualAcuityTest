@@ -75,11 +75,12 @@ document.getElementById('start').onclick = () => {
 
     window.setTimeout(() => {
     
-        let count = 0;
+        let count = 20;
         let display = false;
         let default_size = defaultSize();
+        count_skip = 20;  // 今だけ
 
-        while (true) {  // 画像が画面内の入らない場合をスキップ
+        while (true) {  // 画像が画面内に入らない場合をスキップ
             count_skip = 0;
             let acuity = Math.floor(count / 5) * 0.1 + 0.1;
             let pixel = default_size / acuity;
